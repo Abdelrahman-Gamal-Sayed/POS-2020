@@ -1,0 +1,457 @@
+﻿<Window x:Class="ONA_Stores.SettingPage"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="form1" Height="800" Width="900" WindowStartupLocation="CenterScreen"
+          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium" 
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" WindowStyle="None" WindowState="Maximized" ResizeMode="CanResizeWithGrip">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid VerticalAlignment="Center"  Margin="0,0,0,0" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="8">
+                <TextBlock VerticalAlignment="Center">Light</TextBlock>
+                <ToggleButton x:Name="Background" IsChecked="{x:Null}" Margin="8 0 16 0"  Click="Background_Click"  />
+                <TextBlock VerticalAlignment="Center">Dark</TextBlock>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0 12 0 0">
+                <ItemsControl ItemsSource="{Binding Swatches, Mode=OneTime}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Grid Height="120" Width="200"  VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="1" >
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="FontWeight" Value="DemiBold" />
+                    <Setter Property="Margin" Value="4" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="3">
+                <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">Primary - Mid</TextBlock>
+            </Border>
+            <Border Background="{DynamicResource PrimaryHueLightBrush}"
+                Grid.Row="1" Grid.Column="0">
+                <TextBlock FontWeight="Bold" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">Light</TextBlock>
+            </Border>
+            <Border Background="{DynamicResource PrimaryHueMidBrush}"
+                Grid.Row="1" Grid.Column="1">
+                <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">Mid</TextBlock>
+            </Border>
+            <Border Background="{DynamicResource PrimaryHueDarkBrush}"
+                Grid.Row="1" Grid.Column="2">
+                <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">Dark</TextBlock>
+            </Border>
+            <Border x:Name="AccentBrush" Background="{DynamicResource SecondaryAccentBrush}"
+                Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0">
+                <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}">Accent</TextBlock>
+            </Border>
+
+
+
+        </Grid>
+        <Grid Height="34" VerticalAlignment="Top" Background="{DynamicResource PrimaryHueDarkBrush}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right" Height="29">
+                <Button   x:Name="btnMin"  Content="{materialDesign:PackIcon Kind=WindowMinimize}" ToolTip="تصغير" Foreground="White" Margin="2,2,2,0"   HorizontalAlignment="Right" Click="btnMin_Click" Height="Auto" Width="46" />
+                <Grid>
+                    <Button  x:Name="btnMax"  Content="{materialDesign:PackIcon WindowMaximize}" ToolTip="تكبير" Foreground="White" Margin="0,2,2,0"   HorizontalAlignment="Right" Click="btnMax_Click" Height="Auto" />
+                    <Button  x:Name="btnRestore"  Content="{materialDesign:PackIcon Kind=WindowRestore}" ToolTip="الوضع الافتراضى" Foreground="White" Margin="0,2,2,0"   HorizontalAlignment="Right" Height="Auto" Click="Restore_Click" Visibility="Collapsed" />
+
+                </Grid>
+                <Button x:Name="btnClose"   Content="{materialDesign:PackIcon WindowClose}" ToolTip="اغلاق" Foreground="White" Margin="2,2,2,0"  HorizontalAlignment="Right" Click="btnClose_Click" Height="Auto" Width="45" />
+            </StackPanel>
+            <TextBlock Text="DMS" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="White"/>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left"/>
+
+        </Grid>
+        <ScrollViewer  Grid.Row="3" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+            <WrapPanel Grid.Row="3">
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90"  Grid.Row="3" >
+                    <StackPanel Background="Yellow" >
+                        <StackPanel>
+                            <Label x:Name="Name" Margin="5" Foreground="Black"  HorizontalAlignment="Center">Yellow</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+  Badge="{materialDesign:PackIcon Kind=ColorLens}"
+  BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary"  Background="Yellow" Foreground="Black" Click="Btn_Primary_Click">
+                                    Primary
+                                </Button>
+                            </materialDesign:Badged >
+                            <materialDesign:Badged Margin="10"
+  Badge="{materialDesign:PackIcon Kind=ColorLens}"
+  BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent" Background="Yellow" Foreground="Black" Click="Btn_Accent_Click" >
+                                    Accent
+                                </Button>
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FFE7C251" >
+                        <StackPanel>
+                            <Label x:Name="Name2" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="amber"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary2"  Background="#FFE7C251" Foreground="Black" Content="Primary" Click="Btn_Primary2_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent2" Background="#FFE7C251" Foreground="Black" Content="Accent" Click="Btn_Accent2_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="Orange" >
+                        <StackPanel>
+                            <Label x:Name="Name3" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Orange"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary3"  Background="Orange" Foreground="Black" Content="Primary" Click="Btn_Primary3_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent3" Background="Orange" Foreground="Black" Content="Accent" Click="Btn_Accent3_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="OrangeRed" >
+                        <StackPanel>
+                            <Label x:Name="Name4" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="DeepOrange"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary4"  Background="OrangeRed" Foreground="Black" Content="Primary" Click="Btn_Primary4_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent4" Background="OrangeRed" Foreground="Black" Content="Accent" Click="Btn_Accent4_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF90CAF9" >
+                        <StackPanel>
+                            <Label x:Name="Name5" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="LightBlue"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary5"  Background="#FF5DA3DE" Foreground="Black" Content="Primary" Click="Btn_Primary5_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent5" Background="#FF5DA3DE" Foreground="Black" Content="Accent" Click="Btn_Accent5_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF1976D2" >
+                        <StackPanel>
+                            <Label x:Name="Name6" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Blue"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary6"  Background="#FF2196F3" Foreground="Black" Content="Primary" Click="Btn_Primary6_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent6" Background="#FF2962FF" Foreground="Black" Content="Accent" Click="Btn_Accent6_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF009688" >
+                        <StackPanel>
+                            <Label x:Name="Name7" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Teal"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary7"  Background="Teal" Foreground="Black" Content="Primary" Click="Btn_Primary7_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent7" Background="Teal" Foreground="Black" Content="Accent" Click="Btn_Accent7_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF00BCD4" >
+                        <StackPanel>
+                            <Label x:Name="Name8" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Cyan"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary8"  Background="#FF00BCD4" Foreground="Black" Content="Primary" Click="Btn_Primary8_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent8" Background="#FF00BCD4" Foreground="Black" Content="Accent" Click="Btn_Accent8_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FFE91E63" >
+                        <StackPanel>
+                            <Label x:Name="Name9" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Pink"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary9"  Background="#FFE91E63" Foreground="Black" Content="Primary" Click="Btn_Primary9_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent9" Background="#FFC51162" Foreground="Black" Content="Accent" Click="Btn_Accent9_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF4CAF50" >
+                        <StackPanel>
+                            <Label x:Name="Name10" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Green"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary10"  Background="#FF4CAF50" Foreground="Black" Content="Primary" Click="Btn_Primary10_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent10" Background="#FF4CAF50" Foreground="Black" Content="Accent" Click="Btn_Accent10_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF512DA8" >
+                        <StackPanel>
+                            <Label x:Name="Name11" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="DeepPurple"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary11"  Background="#FF673AB7" Foreground="Black" Content="Primary" Click="Btn_Primary11_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent11" Background="#FF6200EA" Foreground="Black" Content="Accent" Click="Btn_Accent11_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF303F9F" >
+                        <StackPanel>
+                            <Label x:Name="Name12" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Indigo"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary12"  Background="#FF3F51B5" Foreground="Black" Content="Primary" Click="Btn_Primary12_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent12" Background="#FF304FFE" Foreground="Black" Content="Accent" Click="Btn_Accent12_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF8BC34A" >
+                        <StackPanel>
+                            <Label x:Name="Name13" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="LightGreen"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary13"  Background="#FF8BC34A" Foreground="Black" Content="Primary" Click="Btn_Primary13_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent13" Background="#FF64DD17" Foreground="Black" Content="Accent" Click="Btn_Accent13_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FFD32F2F" >
+                        <StackPanel>
+                            <Label x:Name="Name14" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Red"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary14"  Background="#FFF44336" Foreground="Black" Content="Primary" Click="Btn_Primary14_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent14" Background="#FFD50000" Foreground="Black" Content="Accent" Click="Btn_Accent14_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FFCDDC39" >
+                        <StackPanel>
+                            <Label x:Name="Name15" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Lime"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary15"  Background="#FFCDDC39" Foreground="Black" Content="Primary" Click="Btn_Primary15_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent15" Background="#FFAEEA00" Foreground="Black" Content="Accent" Click="Btn_Accent15_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF9C27B0" >
+                        <StackPanel>
+                            <Label x:Name="Name16" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Purple"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary16"  Background="#FF9C27B0" Foreground="Black" Content="Primary" Click="Btn_Primary16_Click"/>
+                            </materialDesign:Badged>
+                            <materialDesign:Badged Margin="10"
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="Accent">
+                                <Button  x:Name="btn_Accent16" Background="#FFAA00FF" Foreground="Black" Content="Accent" Click="Btn_Accent16_Click" />
+                            </materialDesign:Badged>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF607D8B" >
+                        <StackPanel>
+                            <Label x:Name="Name17" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="BlueGrey"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <materialDesign:Badged Margin="10" 
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary17"  Background="#FF455A64" Foreground="Black" Content="Primary" Click="Btn_Primary17_Click"/>
+                            </materialDesign:Badged>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF9E9E9E" >
+                        <StackPanel>
+                            <Label x:Name="Name1" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Grey"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <materialDesign:Badged Margin="10" 
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary1"  Background="#FF616161" Foreground="Black" Content="Primary" Click="Btn_Primary1_Click"/>
+                            </materialDesign:Badged>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{DynamicResource PrimaryHueDarkBrush}" BorderThickness="3" Margin="5" Width="210" Height="90" >
+                    <StackPanel Background="#FF795548" >
+                        <StackPanel>
+                            <Label x:Name="Name18" Margin="5" Foreground="Black"  HorizontalAlignment="Center" Content="Brown"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <materialDesign:Badged Margin="10" 
+                            Badge="{materialDesign:PackIcon Kind=ColorLens}"
+                            BadgeColorZoneMode="PrimaryMid">
+                                <Button x:Name="btn_Primary18"  Background="#FF5D4037" Foreground="Black" Content="Primary" Click="Btn_Primary18_Click"/>
+                            </materialDesign:Badged>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

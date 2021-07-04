@@ -1,0 +1,1284 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" x:Class="ONA_Stores.MainFRM"
+        Title="form1" Height="600" Width="1185" WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"  WindowState="Maximized" WindowStyle="None">
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="40"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="OpenMenueBTN">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseMenueBTN">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush  Opacity="0.5"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Height="42" VerticalAlignment="Top"   Background="{DynamicResource PrimaryHueDarkBrush}" Grid.ColumnSpan="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button   x:Name="btnMin"  Content="{materialDesign:PackIcon Kind=WindowMinimize}" ToolTip="تصغير" Foreground="White" Margin="2"   HorizontalAlignment="Right" Click="btnMin_Click" />
+                <Grid>
+                    <Button  x:Name="btnMax"  Content="{materialDesign:PackIcon WindowMaximize}" ToolTip="تكبير" Foreground="White" Margin="2"   HorizontalAlignment="Right" Click="btnMax_Click" />
+                    <Button  x:Name="btnRestore"  Content="{materialDesign:PackIcon Kind=WindowRestore}" ToolTip="الوضع الافتراضى" Foreground="White" Margin="2"   HorizontalAlignment="Right" Click="Restore_Click" Visibility="Collapsed" />
+
+                </Grid>
+                <Button x:Name="btnClose"   Content="{materialDesign:PackIcon WindowClose}" ToolTip="اغلاق" Foreground="White" Margin="2"  HorizontalAlignment="Right" Click="btnClose_Click" />
+            </StackPanel>
+
+            <Image Source="media/shoes.png"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" />
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">
+                <materialDesign:PopupBox  Margin="20,0,10,0" Foreground="White" PlacementMode="BottomAndAlignLeftEdges"  StaysOpen="False">
+
+                    <StackPanel >
+
+                        <Button x:Name="btn_main_form" Click="btn_main_form_Click" >
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <TextBlock Text="الشاشة الرئيسية" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <materialDesign:PackIcon Kind="Database" Width="25" Height="25"   VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+                            </StackPanel>
+                        </Button>
+
+
+
+                        <Button x:Name="btn_report_form" Click="btn_report_form_Click">
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <TextBlock Text="التقارير" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <materialDesign:PackIcon Kind="Calculator" Width="25" Height="25"   VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+
+                        <Button x:Name="SettingBTN" Click="SettingBTN_Click">
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <TextBlock Text="الاعدادات" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <materialDesign:PackIcon Kind="Settings" Width="25" Height="25"   VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button x:Name="SwitchBTN" Click="SwitchBTN_Click">
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <TextBlock Text="تغيير المستخدم" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <materialDesign:PackIcon Kind="SwitchAccount" Width="25" Height="25"   VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="LogOutBTN" Click="LogOutBTN_Click">
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <TextBlock Text="خروج من البرنامج" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" />
+                                <materialDesign:PackIcon Kind="Shutdown" Width="25" Height="25"   VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+                <TextBlock  VerticalAlignment="Center" FontSize="18"/>
+
+            </StackPanel>
+
+        </Grid>
+        <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Right" Background="{DynamicResource PrimaryHueDarkBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+
+            <StackPanel>
+                <Grid Height="150" Background="White">
+                    <Image Source="media/shoes.png" Margin="5" />
+                    <Button x:Name="CloseMenueBTN" VerticalAlignment="Top" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Visibility="Collapsed" Click="CloseMenueBTN_Click">
+                        <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline" Width="25" Height="25" Foreground="{DynamicResource PrimaryHueDarkBrush}"/>
+                    </Button>
+
+                    <Button x:Name="OpenMenueBTN" VerticalAlignment="Top" Width="50" FlowDirection="RightToLeft"   Height="50" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Click="OpenMenueBTN_Click">
+                        <materialDesign:PackIcon Kind="Menu"  Width="25" Height="25" Foreground="{DynamicResource PrimaryHueDarkBrush}" />
+                    </Button>
+
+                </Grid>
+                <ListView x:Name="mainList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  SelectionChanged="ListView_SelectionChanged">
+
+                    <ListViewItem  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountAddress" Width="25" Height="25"  Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="العملاء و الموردين" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="RefrigeratorFilledBottom" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة الشراء" VerticalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Package" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة البيع" VerticalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="MoneyUsd" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة المصروفات" VerticalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cash" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة دفع الاجل" VerticalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CashRefund" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة المرتجع" VerticalAlignment="Center" Foreground="White" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Visibility="Collapsed"   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Money" Foreground="White"  Width="25" Height="25"  VerticalAlignment="Center"/>
+                            <TextBlock Text="شاشة الشيكات" VerticalAlignment="Center" Foreground="White" Margin="20 10" d:IsHidden="True"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+
+
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="g_cash" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter HorizontalAlignment="Right"    Width="5" Grid.RowSpan="2" />
+            <ScrollViewer x:Name="MyScrollViewer" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
+                <WrapPanel Name="mainstackss" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" />
+            </ScrollViewer>
+
+            <Grid Grid.Column="1" Margin="0,0,0,0" Grid.Row="1"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210*"/>
+                    <ColumnDefinition Width="211*"/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter HorizontalAlignment="Right"    Width="5" />
+                <ScrollViewer x:Name="MyScrollViewer22" Grid.Column="1"  Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <WrapPanel Name="maingroup" Margin="5" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                </ScrollViewer>
+                <Grid>
+                    <ScrollViewer x:Name="MyScrollsssViewer22" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <WrapPanel Name="subgroup" Margin="5"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                    </ScrollViewer>
+                </Grid>
+
+
+
+            </Grid>
+            <Grid    Grid.ColumnSpan="2" Margin="0,0,10,0"  >
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,6,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                    <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName40"
+                        materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" KeyDown="TxtAName40_KeyDown" TextChanged="txtAName40_TextChanged" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,45,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                    <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName41"
+                        materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,6,296,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="522" Visibility="Visible">
+                    <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName42"
+                        materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="485" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,43,296,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                    <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName43"
+                        materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" />
+                </StackPanel>
+                <Button x:Name="savenewpaitient2" Content="{materialDesign:PackIcon Kind=Done}"  Margin="0,90,166,0" VerticalAlignment="Top" HorizontalAlignment="Right"  ToolTip="حفظ" Click="Savenewpaitient2_Click"/>
+                <Button Content="{materialDesign:PackIcon Kind=Refresh}"  Margin="0,90,219,0" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="جديد" Click="Button_Click_12"/>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,82,14,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="147">
+                    <materialDesign:PackIcon Kind="BarcodeScan" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName44" IsReadOnly="True"
+                        materialDesign:HintAssist.Hint="كود العميل"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="100" />
+                </StackPanel>
+                <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" HorizontalAlignment="Right" Height="46" Margin="0,86,287,0" VerticalAlignment="Top" Width="290">
+                    <Canvas>
+                        <StackPanel Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="199" Canvas.Left="319">
+                            <materialDesign:PackIcon Kind="Magic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+                            <ComboBox x:Name="cbx_typ_items1" materialDesign:HintAssist.Hint="نوع الحذاء "  SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="161" DropDownClosed="Cbx_typ_items1_DropDownClosed" >
+
+                                <ComboBoxItem Content="رجالي"/>
+
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="280" Canvas.Left="8">
+                            <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName45"
+                        materialDesign:HintAssist.Hint="بحث"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" KeyDown="TxtAName45_KeyDown" />
+                        </StackPanel>
+
+                    </Canvas>
+
+                </Border>
+                <TextBlock x:Name="textBlock" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,38,635.4,0" TextWrapping="Wrap" Text="شاشة البيع النقدي وهي شاشة البيع للعملاء الذين يدفعون نقدي و هنا اختيار العميل اختياري  "  Height="56" Width="233" FlowDirection="RightToLeft" IsEnabled="False" Visibility="Collapsed"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="g_payee"  Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="86*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter HorizontalAlignment="Right"    Width="5" Grid.RowSpan="2" />
+            <ScrollViewer x:Name="MyScrollViewer3" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
+                <WrapPanel x:Name="mainstackss2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" />
+            </ScrollViewer>
+
+            <Grid Grid.Column="1"  Grid.Row="1"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210*"/>
+                    <ColumnDefinition Width="211*"/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter HorizontalAlignment="Right"    Width="5" />
+                <ScrollViewer x:Name="MyScrollViewer4" Grid.Column="1"  Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <WrapPanel x:Name="maingroup2" Margin="5" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                </ScrollViewer>
+                <Grid>
+                    <ScrollViewer x:Name="MyScrollsssViewer2" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" d:IsHidden="True">
+                        <WrapPanel x:Name="subgroup2" Margin="5"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                    </ScrollViewer>
+                </Grid>
+
+
+
+            </Grid>
+            <Grid    Grid.ColumnSpan="2" Margin="0,0,10,0"  >
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,6,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                    <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName20"
+                        materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" KeyDown="TxtAName20_KeyDown"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,45,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                    <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName21"
+                        materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,6,296,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="522" Visibility="Visible">
+                    <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName22"
+                        materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="485" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,43,296,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                    <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName23"
+                        materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" />
+                </StackPanel>
+                <Button x:Name="savenewpaitient1" Content="{materialDesign:PackIcon Kind=Done}"  Margin="0,98,168,0" VerticalAlignment="Top" HorizontalAlignment="Right"  ToolTip="حفظ" Click="Savenewpaitient1_Click"/>
+                <Button Content="{materialDesign:PackIcon Kind=Refresh}"  Margin="0,98,221,0" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="جديد" Click="Button_Click_7"/>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,90,16,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="147">
+                    <materialDesign:PackIcon Kind="BarcodeScan" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName24" IsReadOnly="True"
+                        materialDesign:HintAssist.Hint="كود المورد"  TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="100" />
+                </StackPanel>
+                <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" HorizontalAlignment="Right" Height="46" Margin="0,87,296,0" VerticalAlignment="Top" Width="290">
+                    <Canvas>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed" FlowDirection="RightToLeft" Width="199" Canvas.Left="319">
+                            <materialDesign:PackIcon Kind="Magic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+                            <ComboBox x:Name="cbx_typ_items3" materialDesign:HintAssist.Hint="نوع الحذاء " SelectedIndex="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="161" >
+
+                                <ComboBoxItem Content="حريمى"/>
+
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="280" Canvas.Left="8">
+                            <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName47"
+                                materialDesign:HintAssist.Hint="بحث"  TextAlignment="Center"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" KeyDown="TxtAName47_KeyDown" />
+                        </StackPanel>
+
+                    </Canvas>
+
+                </Border>
+                <TextBlock x:Name="textBlock_Copy1" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,39,576.4,0" TextWrapping="Wrap"  Height="56" Width="233" FlowDirection="RightToLeft" IsEnabled="False"><Run FlowDirection="RightToLeft" Text="شاشة الشراء و فيها يتم شراء الاصناف لاضافتها داخل المخزن و هنا ادخال المورد اجباري "/></TextBlock>
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="g_cash1" Visibility="Visible" Background="{DynamicResource PrimaryHueDarkBrush}"  Grid.Row="3" d:IsHidden="True" >
+            <Button Content="الغاء" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,172,0" Height="46" Width="140" Click="Button_Click_13" />
+            <Button Content="الفاتورة" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,10,0" Height="46" Width="145" Click="Button_Click_9" />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="597,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName6"  Text="0"
+            		materialDesign:HintAssist.Hint="الاجمالى" IsReadOnly="True"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="120" TextChanged="txtAName14_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="232,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="143" Height="46">
+                <TextBox x:Name="txtAName1"  Text="0"
+            		materialDesign:HintAssist.Hint="المدفوع"  TextAlignment="Center" TextChanged="txtAName1_TextChanged"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="118" PreviewTextInput="NumericOnly" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="104,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="91" Height="46">
+                <TextBox x:Name="txtAName2" IsReadOnly="True" Text="0"
+            		materialDesign:HintAssist.Hint="الباقى"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="83" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"  Visibility="Collapsed" Margin="375,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Height="46">
+                <materialDesign:PackIcon Kind="Percent" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName14"  Text="0"
+                    materialDesign:HintAssist.Hint="نسبة الخصم"   TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="56" PreviewTextInput="NumericOnly" TextChanged="txtAName14_TextChanged" />
+                <TextBox x:Name="txtAName12_Copy1"  Text="%"
+                    IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="24" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Visibility="Collapsed" FlowDirection="RightToLeft" Margin="417,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName15" Text="0"
+                    materialDesign:HintAssist.Hint="الاجمالى بعد الخصم" IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="120" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" FlowDirection="RightToLeft" Margin="669,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Height="46">
+                <materialDesign:PackIcon Kind="Percent" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName25"  Text="0"
+                    materialDesign:HintAssist.Hint="نسبة الضريبة"   TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="56" PreviewTextInput="NumericOnly" TextChanged="txtAName14_TextChanged" />
+                <TextBox x:Name="txtAName12_Copy3"  Text="%"
+                    IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="24" />
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="g_delevry1" Visibility="Visible" Background="{DynamicResource PrimaryHueDarkBrush}"  Grid.Row="3" d:IsHidden="True" >
+            <Button Content="الغاء" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,160,0" Height="46" Width="140" Click="Button_Click_4"  />
+            <Button Content="الفاتورة" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,10,0" Height="46" Width="145" Click="Button_Click_5"   />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="294,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName3"  Text="0"
+        			materialDesign:HintAssist.Hint="الاجمالى" IsReadOnly="True"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="120" TextChanged="txtAName3_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="270,10,0,0" Visibility="Collapsed"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName10" Text="0"
+                    materialDesign:HintAssist.Hint="الاجمالى بعد الخصم" IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="120" TextChanged="TxtAName30_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Visibility="Collapsed" Margin="426,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Height="46">
+                <materialDesign:PackIcon Kind="Percent" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName12"  Text="0"
+                    materialDesign:HintAssist.Hint="نسبة الخصم"   TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="56" PreviewTextInput="NumericOnly" TextChanged="txtAName3_TextChanged" />
+                <TextBox x:Name="txtAName12_Copy"  Text="%"
+                    IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="24" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" FlowDirection="RightToLeft" Margin="714,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="118" Height="46">
+                <materialDesign:PackIcon Kind="Percent" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName11"  Text="0"
+                    materialDesign:HintAssist.Hint="نسبة الضريبة"   TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="59" PreviewTextInput="NumericOnly" TextChanged="txtAName3_TextChanged" />
+                <TextBox x:Name="txtAName12_Copy4"  Text="%"
+                    IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="24" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="136" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName29" Text="0"
+                    materialDesign:HintAssist.Hint="المتبقى" IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="100" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="141,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="136" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName30" Text="0"
+                    materialDesign:HintAssist.Hint="المدفوع"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="97" TextChanged="TxtAName30_TextChanged" />
+            </StackPanel>
+            <Button Content="شيك" HorizontalAlignment="Right"   VerticalAlignment="Top" Margin="0,10,414,0" Height="46" Width="170" FontSize="36" FontFamily="Arial" Click="Button_Click_15"  />
+        </Grid>
+        <Grid x:Name="g_delevry"  Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="377*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter HorizontalAlignment="Right"    Width="5" Grid.Row="1" />
+            <ScrollViewer x:Name="MyScrollViewer1" Margin="5,0,5,5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <WrapPanel x:Name="mainstackss1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" />
+            </ScrollViewer>
+
+            <Grid Grid.Column="1" Grid.RowSpan="2"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35*"/>
+                    <RowDefinition Height="86*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210*"/>
+                    <ColumnDefinition Width="211*"/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter HorizontalAlignment="Right"    Width="5" Grid.Row="1" />
+                <ScrollViewer x:Name="MyScrollViewer2" Grid.Column="1"  Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <WrapPanel x:Name="maingroup1" Margin="5" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                </ScrollViewer>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer x:Name="MyScrollsssViewer1" Margin="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <WrapPanel x:Name="subgroup1" Margin="5"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" TouchUp="maingroup_TouchUp" MouseLeftButtonUp="maingroup_MouseLeftButtonUp" MouseLeftButtonDown="maingroup_MouseLeftButtonDown" />
+                    </ScrollViewer>
+                </Grid>
+                <Grid    Grid.ColumnSpan="2" Margin="0,0,0,0"  >
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,10,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                        <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName5"
+                			materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+                			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" KeyDown="TxtAName5_KeyDown"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,55,10,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName4"
+                    		materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,10,291,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="425" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName7"
+                    		materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="386" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,53,291,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName8"
+                    		materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" />
+                    </StackPanel>
+                    <Button x:Name="savenewpaitient" Content="{materialDesign:PackIcon Kind=Done}"  Margin="0,100,169,0" VerticalAlignment="Top" HorizontalAlignment="Right"  ToolTip="حفظ" Click="savenewpaitient_Click"/>
+                    <Button Content="{materialDesign:PackIcon Kind=Refresh}"  Margin="0,100,222,0" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="جديد" Click="Button_Click_6"/>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,94,15,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="147">
+                        <materialDesign:PackIcon Kind="BarcodeScan" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName9" IsReadOnly="True"
+                    		materialDesign:HintAssist.Hint="كود العميل"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="100" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="Collapsed" FlowDirection="RightToLeft" Margin="0,10,303.8,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="206">
+                        <materialDesign:PackIcon Kind="Downloads" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName26" IsReadOnly="True"
+                            materialDesign:HintAssist.Hint="اجمالى حساب العميل"  TextAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="162" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="Collapsed" FlowDirection="RightToLeft" Margin="0,10,500.8,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="210">
+                        <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName27" IsReadOnly="True"
+                            materialDesign:HintAssist.Hint="اجمالى المدفوع من العميل"  TextAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="174" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,11,724.8,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="282">
+                        <materialDesign:PackIcon Kind="BarcodeScan" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName28" IsReadOnly="True"
+                            materialDesign:HintAssist.Hint="الاجمالى المطلوب من العميل"  TextAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="241" />
+                    </StackPanel>
+                    <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" HorizontalAlignment="Right" Height="46" Margin="0,100,291,-6" VerticalAlignment="Top" Width="303">
+                        <Canvas Margin="0,0,231,0">
+                            <StackPanel Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="199" Canvas.Left="319">
+                                <materialDesign:PackIcon Kind="Magic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+                                <ComboBox x:Name="cbx_typ_items2" materialDesign:HintAssist.Hint="نوع الحذاء " SelectedIndex="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="161" DropDownClosed="Cbx_typ_items2_DropDownClosed" >
+
+                                    <ComboBoxItem Content="حريمى"/>
+
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="280" Canvas.Left="8">
+                                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                                <TextBox x:Name="txtAName46"
+                                    materialDesign:HintAssist.Hint="بحث"  TextAlignment="Center"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" KeyDown="TxtAName46_KeyDown" />
+                            </StackPanel>
+
+                        </Canvas>
+
+                    </Border>
+                    <TextBlock x:Name="textBlock_Copy" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,60,582.8,0" TextWrapping="Wrap"  Height="71" Width="233" FlowDirection="RightToLeft" IsEnabled="False"><Span><Run Text="شاشة البيع "/></Span><Span><Run FlowDirection="RightToLeft" Text=" الاجل "/></Span><Span><Run Text=" وهي شاشة البيع للعملاء الذين يدفعون "/></Span><Run FlowDirection="RightToLeft" Text=" بنظا"/><Run FlowDirection="RightToLeft" Text="م"/><Run FlowDirection="RightToLeft" Text=" الاجل "/><Span><Run Text="و هنا اختيار العميل ا"/></Span><Span><Run FlowDirection="RightToLeft" Text="جباري لكي يضاف اجمالي الاجل في حساب العميل"/></Span><Span><Run Text="  "/></Span></TextBlock>
+                </Grid>
+
+
+
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="g_payee1"  Background="{DynamicResource PrimaryHueDarkBrush}"  Grid.Row="3" d:IsHidden="True" >
+            <Button Content="الغاء" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,160,0" Height="46" Width="140" Click="Button_Click" />
+            <Button Content="الفاتورة" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,10,10,0" Height="46" Width="145" Click="Button_Click_2" />
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="435,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="202" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName13"  Text="0"
+                    materialDesign:HintAssist.Hint="الاجمالى" IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="163" TextChanged="TxtAName13_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="222,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="163" Height="46">
+                <TextBox x:Name="txtAName16"  Text="0"
+                    materialDesign:HintAssist.Hint="المدفوع"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="160" PreviewTextInput="NumericOnly" TextChanged="TxtAName16_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="1,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="187" Height="46">
+                <TextBox x:Name="txtAName17" IsReadOnly="True" Text="0"
+                    materialDesign:HintAssist.Hint="الباقى"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="176" />
+            </StackPanel>
+            <StackPanel Visibility="Hidden" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="375,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Height="46">
+                <materialDesign:PackIcon Kind="Percent" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName18"  Text="0"
+                    materialDesign:HintAssist.Hint="نسبة الخصم"   TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="56" PreviewTextInput="NumericOnly" TextChanged="TxtAName13_TextChanged" />
+                <TextBox x:Name="txtAName12_Copy2"  Text="%"
+                    IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="24" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Hidden" FlowDirection="RightToLeft" Margin="214,10,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" Height="46">
+                <materialDesign:PackIcon Kind="Cash100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName19" Text="0"
+                    materialDesign:HintAssist.Hint="الاجمالى بعد الخصم" IsReadOnly="True"  TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="120" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="g_msrofat" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="479.2"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,105,100.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="306" Height="38">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_price_items2"
+                    materialDesign:HintAssist.Hint="المبلغ المصروف"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="264" PreviewTextInput="NumericOnly"  />
+            </StackPanel>
+            <Button x:Name="button" Content="حفظ" HorizontalAlignment="Left" Margin="189,88,0,0" VerticalAlignment="Top" Width="108" Height="46" Click="Button_Click_8"/>
+            <DataGrid x:Name="dg_items"  Margin="538,270,29.4,0" VerticalAlignment="Top" IsReadOnly="True" FlowDirection="RightToLeft" SelectionChanged="dg_items_SelectionChanged" Height="199" />
+            <StackPanel Orientation="Horizontal" Margin="0,178,100.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260" Height="38">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                <TextBox x:Name="txt_search_items"
+                    materialDesign:HintAssist.Hint="بحث"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216" SelectionChanged="txt_search_items_SelectionChanged"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,29,558.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="306" Height="38" Visibility="Hidden">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_price_items1"
+                    materialDesign:HintAssist.Hint="كود المصروفات "
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="264" PreviewTextInput="NumericOnly" IsReadOnly="True"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,38,101.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="696" Height="38">
+                <materialDesign:PackIcon Kind="Abc" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="textBox"
+                    materialDesign:HintAssist.Hint=" شرح المصروفات مثال :فاتورة كهرباء"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="648" Margin="0,0,0,0.4"  />
+            </StackPanel>
+
+        </Grid>
+        <Grid x:Name="g_ageeel"  Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="74*"/>
+                <RowDefinition Height="387*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" Grid.RowSpan="2"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="97*"/>
+                    <RowDefinition Height="364*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210*"/>
+                    <ColumnDefinition Width="211*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,238,190,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="210" Grid.Column="1" Grid.Row="1">
+                    <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="txtAName39" 
+                            materialDesign:HintAssist.Hint="المبلغ المسدد"  TextAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="174" PreviewTextInput="NumericOnly" TextChanged="txtAName39_TextChanged" />
+                </StackPanel>
+                <Button Content="حفظ"  Margin="0,314,223,0" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="جديد" Grid.Column="1" Grid.Row="1" Click="Button_Click_11"/>
+                <DataGrid x:Name="dg_items_Copy"  Margin="544,221.6,23.4,0" VerticalAlignment="Top" IsReadOnly="True" FlowDirection="RightToLeft" SelectionChanged="dg_items_Copy_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1" Visibility="Collapsed" />
+                <StackPanel Orientation="Horizontal" Margin="0,178.6,54.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260" Grid.Row="1" Grid.Column="1" Visibility="Collapsed">
+                    <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                    <TextBox x:Name="txt_search_items1"
+                        materialDesign:HintAssist.Hint="بحث"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216" TextChanged="Txt_search_items1_TextChanged"  />
+                </StackPanel>
+                <CheckBox x:Name="checkBox" Content="" HorizontalAlignment="Left" Margin="26,10.4,0,0" Grid.Row="1" VerticalAlignment="Top" IsEnabled="False"/>
+                <GroupBox Header="بيانات العميل" HorizontalAlignment="Right" Margin="0,46,60,0" VerticalAlignment="Top" Width="469" Height="287" FlowDirection="RightToLeft" Grid.Column="1" Grid.RowSpan="2">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,187,214,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="231">
+                            <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName31"
+                				materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="190" PreviewTextInput="NumberOnly" KeyDown="TxtAName40_KeyDown" TextChanged="txtAName40_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,103,164,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName32"
+                				materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="231" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,148,-6,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="451" Visibility="Visible">
+                            <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName33"
+                				materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="395" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,186,0,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="213" Visibility="Visible">
+                            <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName34"
+                				materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="174" PreviewTextInput="NumberOnly" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,1,188,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257">
+                            <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName35"
+                				materialDesign:HintAssist.Hint="بحث العميل"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="206" KeyDown="txtAName35_KeyDown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,48,167,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                            <materialDesign:PackIcon Kind="AccountAddress" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <ComboBox x:Name="cbx_typ_items9" materialDesign:HintAssist.Hint=" العميل " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items9_DropDownOpened" DropDownClosed="cbx_typ_items9_DropDownClosed" >
+                                <TextSearch.TextPath>CLIENT_ID</TextSearch.TextPath>
+                                <ComboBox.ItemTemplate >
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                                    <Binding Path="CLIENT_ID"/>
+                                                    <Binding Path="NAME"/>
+
+
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,103,0,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="164" Visibility="Visible">
+                            <materialDesign:PackIcon Kind="Money100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                            <TextBox x:Name="txtAName36"
+                				materialDesign:HintAssist.Hint="الاجمالى المطلوب"  TextAlignment="Center"
+                				Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="128" PreviewTextInput="NumericOnly" FontSize="12" IsReadOnly="True" TextChanged="txtAName39_TextChanged" />
+                        </StackPanel>
+
+                    </Grid>
+                </GroupBox>
+
+
+
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="g_mortag3" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="479.2"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="dg_items1" BorderThickness="2" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"  Margin="10,53,12,0" VerticalAlignment="Top" IsReadOnly="True" FlowDirection="RightToLeft" Height="246" HorizontalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" VerticalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" GridLinesVisibility="All" SelectionChanged="Dg_items1_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Height="25" x:Name="btnDeleteInvoice"  Content="ارجاع الفاتورة" Click="BtnDeleteInvoice_Click" FontSize="9" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Margin="0,7,47,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260" Height="38">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                <TextBox x:Name="txt_search_items2"
+                    materialDesign:HintAssist.Hint="بحث برقم الفاتورة او اسم العميل"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216" TextChanged="Txt_search_items2_TextChanged"  />
+            </StackPanel>
+            <DataGrid x:Name="dg_items1_Copy" BorderThickness="2" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"  Margin="10,304,12,0" VerticalAlignment="Top" IsReadOnly="True" FlowDirection="RightToLeft" SelectionChanged="dg_items_SelectionChanged" Height="236" HorizontalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" VerticalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" GridLinesVisibility="All" Grid.RowSpan="2" >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Height="25" x:Name="btnDeleteInvoice"  Content="ارجاع المنتج"  FontSize="9" Click="BtnDeleteInvoice_Click_1" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Margin="0,7,345,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260" Height="38">
+                <materialDesign:PackIcon Kind="Counter" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                <TextBox x:Name="txt_search_items3"
+                    materialDesign:HintAssist.Hint="الكمية المرتجعة"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216"  />
+            </StackPanel>
+
+        </Grid>
+
+        <Grid x:Name="g_es_check" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="479.2"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,10,411,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260" Height="38">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                <TextBox x:Name="txt_search_items4"
+                    materialDesign:HintAssist.Hint="بحث رقم الشيك"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216" KeyDown="txt_search_items4_KeyDown"  />
+            </StackPanel>
+            <Button Content="{materialDesign:PackIcon Kind=Refresh}"  Margin="0,16,826.4,0" VerticalAlignment="Top" HorizontalAlignment="Right" ToolTip="جديد" Click="Button_Click_16"/>
+            <DataGrid x:Name="dg_items2" BorderThickness="2" BorderBrush="{DynamicResource PrimaryHueDarkBrush}"  Margin="10,112,12.4,0" VerticalAlignment="Top" IsReadOnly="True" FlowDirection="RightToLeft" Height="246" HorizontalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" VerticalGridLinesBrush="{DynamicResource PrimaryHueDarkBrush}" GridLinesVisibility="All" SelectionChanged="Dg_items1_SelectionChanged" />
+        </Grid>
+        <Grid x:Name="g_coustmar" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,10" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="479.2"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,29,558.4,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="306" Height="38" Visibility="Hidden">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_price_items4"
+        			materialDesign:HintAssist.Hint="كود المصروفات "
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="264" PreviewTextInput="NumericOnly" IsReadOnly="True"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,34,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft">
+                <materialDesign:PackIcon Kind="BarcodeScan" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_code_items" IsReadOnly="True"
+            		materialDesign:HintAssist.Hint="الكود " TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="196" />
+            </StackPanel>
+            <RadioButton x:Name="coustmar" Content="عميل" HorizontalAlignment="Right" Margin="0,66,34,0" VerticalAlignment="Top" FontSize="16" IsChecked="True" Click="coustmar_Click" RenderTransformOrigin="-0.737,1.048"/>
+            <RadioButton x:Name="moward" Content="مورد" HorizontalAlignment="Right" Margin="0,66,212,0" VerticalAlignment="Top" FontSize="16" Click="coustmar_Click"/>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,249,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName49"
+            		materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" KeyDown="TxtAName40_KeyDown" TextChanged="txtAName40_TextChanged" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,117,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName50"
+            		materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,174,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="522" Visibility="Visible">
+                <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName51"
+            		materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="485" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,307,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName52"
+            		materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" />
+            </StackPanel>
+            <DataGrid x:Name="dg_items_Copy1"  Margin="10,312,557,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="dg_items_Copy1_SelectionChanged" FlowDirection="RightToLeft" />
+            <Button Content="حفظ"  Margin="0,153,611,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Click="Button_Click_17" FlowDirection="RightToLeft"/>
+            <Button   Content=" جديد"   Margin="0,153,717,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_18" FlowDirection="RightToLeft"/>
+            <StackPanel Orientation="Horizontal" Margin="0,231,611,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="260">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom" FlowDirection="RightToLeft"/>
+
+                <TextBox x:Name="txt_search_items5"
+            		materialDesign:HintAssist.Hint="بحث"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="216" SelectionChanged="txt_search_items5_SelectionChanged"  />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,381,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName53"
+            		materialDesign:HintAssist.Hint="رصيد افتتاحي"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="244" PreviewTextInput="NumberOnly" />
+            </StackPanel>
+
+        </Grid>
+        <Grid x:Name="g_shra" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" d:IsHidden="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="540"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,29,558,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="306" Height="38" Visibility="Hidden">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_price_items3"
+        			materialDesign:HintAssist.Hint="كود المصروفات "
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="264" PreviewTextInput="NumericOnly" IsReadOnly="True"  />
+            </StackPanel>
+            <DataGrid x:Name="dg_items_Copy2"  Margin="566,312,34,0" VerticalAlignment="Top"  IsReadOnly="True" SelectionChanged="dg_items_Copy1_SelectionChanged" FlowDirection="RightToLeft" />
+            <Button Content="حفظ"  Margin="0,357,701,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Click="Button_Click_22" FlowDirection="RightToLeft"/>
+            <Button   Content="جديد"   Margin="0,357,805,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_20" FlowDirection="RightToLeft"/>
+            <StackPanel x:Name="dfdddd1" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,124,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Counter" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName58"
+        			materialDesign:HintAssist.Hint="الكمية"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" TextChanged="txtAName58_TextChanged" LostFocus="txtAName58_LostFocus" KeyDown="txtAName58_KeyDown" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,73,33,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                <materialDesign:PackIcon Kind="MinusBox" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <ComboBox x:Name="cbx_typ_items" materialDesign:HintAssist.Hint="نوع الصنف " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" SelectionChanged="cbx_typ_items_SelectionChanged" DropDownOpened="cbx_typ_items_DropDownOpened" KeyDown="cbx_typ_items_KeyDown" DropDownClosed="cbx_typ_items_DropDownClosed" LostFocus="cbx_typ_items_LostFocus" >
+                    <TextSearch.TextPath>PRODUCT_CATEGORY_ID</TextSearch.TextPath>
+                    <ComboBox.ItemTemplate >
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                        <Binding Path="PRODUCT_CATEGORY_ID"/>
+                                        <Binding Path="NAME"/>
+
+
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,73,333,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                <materialDesign:PackIcon Kind="MinusBox" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <ComboBox x:Name="cbx_typ_items4" materialDesign:HintAssist.Hint=" الصنف " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items4_DropDownOpened" KeyDown="cbx_typ_items4_KeyDown" DropDownClosed="cbx_typ_items4_DropDownClosed" >
+                    <TextSearch.TextPath>PRODUCT_ID</TextSearch.TextPath>
+                    <ComboBox.ItemTemplate >
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                        <Binding Path="PRODUCT_ID"/>
+                                        <Binding Path="NAME"/>
+
+
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,124,333,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Money" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName54"
+            		materialDesign:HintAssist.Hint="السعر"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" LostFocus="txtAName54_LostFocus" TextChanged="txtAName58_TextChanged" KeyDown="txtAName54_KeyDown" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy1" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,226,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Money100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName55"
+            		materialDesign:HintAssist.Hint="الاجمالي"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" IsReadOnly="True" TextChanged="txtAName55_TextChanged" />
+            </StackPanel>
+            <GroupBox Header="بيانات المورد" HorizontalAlignment="Right" Margin="0,15,619,0" VerticalAlignment="Top" Width="469" Height="287" FlowDirection="RightToLeft">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,187,214,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="231">
+                        <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName56"
+                			materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+                			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="190" PreviewTextInput="NumberOnly" KeyDown="TxtAName40_KeyDown" TextChanged="txtAName40_TextChanged" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,103,164,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName57"
+                			materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+                			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="231" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,148,-6,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="451" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName59"
+                			materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+                			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="395" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,186,0,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="213" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName60"
+                			materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+                			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="174" PreviewTextInput="NumberOnly" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,1,188,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257">
+                        <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName64"
+                    		materialDesign:HintAssist.Hint="بحث المورد"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="206" KeyDown="cbx_typ_items5_KeyDown" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,48,167,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                        <materialDesign:PackIcon Kind="AccountAddress" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <ComboBox x:Name="cbx_typ_items5" materialDesign:HintAssist.Hint=" المورد " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items5_DropDownOpened" KeyDown="cbx_typ_items5_KeyDown" DropDownClosed="cbx_typ_items5_DropDownClosed" >
+                            <TextSearch.TextPath>CLIENT_ID</TextSearch.TextPath>
+                            <ComboBox.ItemTemplate >
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                                <Binding Path="CLIENT_ID"/>
+                                                <Binding Path="NAME"/>
+
+
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+            <StackPanel x:Name="dfdddd1_Copy2" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,226,330,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName61"
+            		materialDesign:HintAssist.Hint=" الاجمالي الفاتورة"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" IsReadOnly="True" />
+            </StackPanel>
+            <Button   Content="حذف من الفاتورة"   Margin="0,311,699,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_21" FlowDirection="RightToLeft"/>
+            <Button x:Name="dddddd"   Content="أضافة الي  الفاتورة"   Margin="0,189,405,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_19" FlowDirection="RightToLeft"/>
+            <StackPanel x:Name="dfdddd1_Copy3" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,18,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName62"
+            		materialDesign:HintAssist.Hint="نوع الصنف"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" KeyDown="txtAName62_KeyDown" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy4" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,18,333,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName63"
+            		materialDesign:HintAssist.Hint="الصنف"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" KeyDown="txtAName63_KeyDown" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy5" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,409,699,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName65"
+            		materialDesign:HintAssist.Hint=" الاجمالي الفاتورة النهائي"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" IsReadOnly="True" />
+            </StackPanel>
+
+        </Grid>
+        <Grid x:Name="g_shra_Copy" Visibility="Visible" Grid.Row="1" Grid.RowSpan="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="540"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,29,558,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="306" Height="38" Visibility="Hidden">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txt_price_items5"
+        			materialDesign:HintAssist.Hint="كود المصروفات "
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="264" PreviewTextInput="NumericOnly" IsReadOnly="True"  />
+            </StackPanel>
+            <DataGrid x:Name="dg_items_Copy3"  Margin="569,318,31,0" VerticalAlignment="Top"  IsReadOnly="True" SelectionChanged="dg_items_Copy1_SelectionChanged" FlowDirection="RightToLeft" />
+            <Button Content="حفظ"  Margin="0,353,699,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Click="Button_Click_26" FlowDirection="RightToLeft"/>
+            <Button   Content="جديد"   Margin="0,353,805,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_23" FlowDirection="RightToLeft"/>
+            <StackPanel x:Name="dfdddd2" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,120,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Counter" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName66"
+        			materialDesign:HintAssist.Hint="الكمية"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" TextChanged="txtAName66_TextChanged" LostFocus="txtAName66_LostFocus" KeyDown="txtAName66_KeyDown" TabIndex="84" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,69,33,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                <materialDesign:PackIcon Kind="MinusBox" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <ComboBox x:Name="cbx_typ_items6" materialDesign:HintAssist.Hint="نوع الصنف " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items6_DropDownOpened" KeyDown="cbx_typ_items6_KeyDown" TabIndex="81" DropDownClosed="cbx_typ_items6_DropDownClosed" LostFocus="cbx_typ_items6_LostFocus" >
+                    <TextSearch.TextPath>PRODUCT_CATEGORY_ID</TextSearch.TextPath>
+                    <ComboBox.ItemTemplate >
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                        <Binding Path="PRODUCT_CATEGORY_ID"/>
+                                        <Binding Path="NAME"/>
+
+
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,69,333,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                <materialDesign:PackIcon Kind="MinusBox" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <ComboBox x:Name="cbx_typ_items7" materialDesign:HintAssist.Hint=" الصنف " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items7_DropDownOpened" KeyDown="cbx_typ_items7_KeyDown" DropDownClosed="cbx_typ_items7_DropDownClosed" TabIndex="83" >
+                    <TextSearch.TextPath>PRODUCT_ID</TextSearch.TextPath>
+                    <ComboBox.ItemTemplate >
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                        <Binding Path="PRODUCT_ID"/>
+                                        <Binding Path="NAME"/>
+
+
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy6" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,184,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Add" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName67"
+        			materialDesign:HintAssist.Hint="خصم"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumberOnly" KeyDown="txtAName67_KeyDown" TextChanged="txtAName66_TextChanged" TabIndex="86" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy7" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,244,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Money100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName68"
+        			materialDesign:HintAssist.Hint="الاجمالي"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" IsReadOnly="True" TextChanged="txtAName68_TextChanged" />
+            </StackPanel>
+            <GroupBox Header="بيانات العميل" HorizontalAlignment="Right" Margin="0,15,619,0" VerticalAlignment="Top" Width="469" Height="287" FlowDirection="RightToLeft">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,187,214,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="231">
+                        <materialDesign:PackIcon Kind="MobilePhone" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName69"
+        					materialDesign:HintAssist.Hint="رقم التلفون"  TextAlignment="Center"
+        					Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="190" PreviewTextInput="NumberOnly" KeyDown="TxtAName40_KeyDown" TextChanged="txtAName40_TextChanged" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,103,164,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281">
+                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName70"
+        					materialDesign:HintAssist.Hint="الاسم"  TextAlignment="Center"
+        					Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="231" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,148,-6,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="451" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="AddressMarker" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName71"
+        					materialDesign:HintAssist.Hint="العنوان"  TextAlignment="Center"
+        					Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="395" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,186,0,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="213" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="PhoneClassic" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName72"
+        					materialDesign:HintAssist.Hint="رقم التلفون 2"  TextAlignment="Center"
+        					Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="174" PreviewTextInput="NumberOnly" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,1,188,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257">
+                        <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName73"
+        					materialDesign:HintAssist.Hint="بحث العميل"  TextAlignment="Center"
+        					Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="206" KeyDown="txtAName73_KeyDown" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,48,167,0" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="RightToLeft" Width="278">
+                        <materialDesign:PackIcon Kind="AccountAddress" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <ComboBox x:Name="cbx_typ_items8" materialDesign:HintAssist.Hint=" العميل " Style="{StaticResource MaterialDesignFloatingHintComboBox}" Width="221" DropDownOpened="cbx_typ_items8_DropDownOpened" KeyDown="cbx_typ_items8_KeyDown" DropDownClosed="cbx_typ_items8_DropDownClosed" >
+                            <TextSearch.TextPath>CLIENT_ID</TextSearch.TextPath>
+                            <ComboBox.ItemTemplate >
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}  |  {1}  ">
+                                                <Binding Path="CLIENT_ID"/>
+                                                <Binding Path="NAME"/>
+
+
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,103,0,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="164" Visibility="Visible">
+                        <materialDesign:PackIcon Kind="Money100" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                        <TextBox x:Name="txtAName81"
+                    		materialDesign:HintAssist.Hint="الاجمالى المطلوب"  TextAlignment="Center"
+                    		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="128" PreviewTextInput="NumericOnly" FontSize="12" IsReadOnly="True" />
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+            <StackPanel x:Name="dfdddd1_Copy8" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,244,338,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName74"
+        			materialDesign:HintAssist.Hint=" الاجمالي الفاتورة"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" IsReadOnly="True" />
+            </StackPanel>
+            <Button   Content="حذف من الفاتورة"   Margin="0,305,699,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_24" FlowDirection="RightToLeft"/>
+            <Button x:Name="fffff"   Content="أضافة الي  الفاتورة"   Margin="0,190,405,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click_25" FlowDirection="RightToLeft" TabIndex="87"/>
+            <StackPanel x:Name="dfdddd1_Copy9" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,14,34,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="257" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName75"
+        			materialDesign:HintAssist.Hint="نوع الصنف"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" KeyDown="txtAName75_KeyDown" TabIndex="80" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy10" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,14,333,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Search" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName76"
+        			materialDesign:HintAssist.Hint="الصنف"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" KeyDown="txtAName76_KeyDown" TabIndex="82" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy11" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,390,699,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName77"
+        			materialDesign:HintAssist.Hint=" الاجمالي الفاتورة النهائي"  TextAlignment="Center"
+        			Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" IsReadOnly="True" TextChanged="txtAName79_TextChanged" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy12" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,120,333,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="Money" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName78"
+            		materialDesign:HintAssist.Hint="السعر"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" LostFocus="txtAName78_LostFocus" TextChanged="txtAName66_TextChanged" KeyDown="txtAName78_KeyDown" TabIndex="85" IsReadOnly="True" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy13" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,442,699,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName79"
+            		materialDesign:HintAssist.Hint=" المدفوع"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" TextChanged="txtAName79_TextChanged" />
+            </StackPanel>
+            <StackPanel x:Name="dfdddd1_Copy14" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,493,699,0"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" Visibility="Visible">
+                <materialDesign:PackIcon Kind="MoneyUsd" Width="30" Height="30" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Bottom"/>
+
+                <TextBox x:Name="txtAName80"
+            		materialDesign:HintAssist.Hint=" الباقي"  TextAlignment="Center"
+            		Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="220" PreviewTextInput="NumericOnly" IsReadOnly="True" />
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

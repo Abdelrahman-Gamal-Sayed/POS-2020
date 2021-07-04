@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="ONA_Stores.Group"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"  
+            >
+    <Grid>
+        <Button x:Name="btn" Height="80" Click="Button_Click">
+
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" VerticalAlignment="Top" >
+
+                <Label x:Name="Code" Content="5000" VerticalAlignment="Center" Visibility="Collapsed" />
+                <Label x:Name="Name" Content="فول فلافل" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                <Image Name="pic" Source="media/correct.png" Width="75"  Height="69"/>
+            </StackPanel>
+        </Button>
+    
+
+    </Grid>
+</UserControl>

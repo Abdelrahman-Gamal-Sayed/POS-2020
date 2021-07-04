@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ONA_Stores.order"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+                  TextElement.FontSize="12" 
+             mc:Ignorable="d" Height="155.171" Width="192.098" 
+             
+           >
+    <Border Background="{DynamicResource PrimaryHueDarkBrush}" CornerRadius="13">
+    <Grid   >
+        <StackPanel  >
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+            <ComboBox x:Name="comboBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center" SelectedIndex="1" Margin="15,10,15,10" DropDownClosed="ComboBox_DropDownClosed">
+                <ComboBoxItem Content="تجزئة"/>
+                <ComboBoxItem Content="جملة"/>
+            </ComboBox>
+                    <Label   Content="الخصم" Margin="0,0,0,0" Height="28"  />
+                    <TextBox  x:Name="disc" Text="0" TextAlignment="Center" Width="30" Height="25" PreviewTextInput="NumberOnly" TextChanged="txtQTY_TextChanged"/>
+                    <Label   Content="%" Margin="-8,0,0,0" Height="28"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" Margin="0,5" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                <Label Content="الكمية"   />
+                <Button x:Name="btnPlus" Content="{materialDesign:PackIcon Kind=Plus}"  VerticalAlignment="Center" Click="btnPlus_Click"/>
+                <TextBox x:Name="txtQTY" Width="25" Margin="5"
+                    		 Text="1" TextAlignment="Center"
+                    		TextChanged="txtQTY_TextChanged" PreviewTextInput="NumberOnly" />
+                <Button x:Name="btnMinus" Content="{materialDesign:PackIcon Kind=Minus}"  Click="btnMinus_Click"   VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" FlowDirection="RightToLeft"  >
+                <Image x:Name="pic" Width="30" Height="30"></Image>
+                <Label x:Name="Name" Content="علبة فول" Margin="0,0,0,0"  />
+                <Label x:Name="price" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                <Label x:Name="code" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_unit" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_package" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_dalay" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="package_size" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <TextBox  x:Name="totalprice" Text="100" TextAlignment="Center" Width="30" Height="25" IsEnabled="False" />
+
+            </StackPanel>
+                <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" HorizontalAlignment="Center" FlowDirection="RightToLeft"  Margin="6,0,20,0" Width="166"  >
+                    <Label x:Name="Name1" Content="العدد فى المخزن" Margin="0,0,0,0" FontSize="10"  />
+                    <Label x:Name="price1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="code1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_unit1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_package1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="price_dalay1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <Label x:Name="package_size1" Content="100" Height="20"  Margin="5" Visibility="Collapsed" />
+                    <TextBox  x:Name="totalQTYstoreDB" Text="999" TextAlignment="Center" Width="30" Height="25" IsEnabled="False" />
+                    <TextBox  x:Name="alarmstoreDB" Text="1" TextAlignment="Center" Width="30" Height="25" IsEnabled="False" />
+                    <TextBox  x:Name="totalQTYstore" Text="99" TextAlignment="Center" Width="30" Height="25" IsEnabled="False" />
+
+                </StackPanel>
+
+            </StackPanel>
+           
+        </Grid>
+    </Border>
+</UserControl>
